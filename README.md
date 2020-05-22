@@ -1,4 +1,4 @@
-# MusicProgrammingProject
+# MusicProgrammingProject - Listen & Lyrics
 
 Find the website here: https://listen-and-lyrics.firebaseapp.com/home
 
