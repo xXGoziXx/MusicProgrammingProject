@@ -98,7 +98,6 @@ npm-debug.log
 yarn-error.log
 testem.log
 /typings
-/src/environments/firebase.config.ts
 # System Files
 .DS_Store
 Thumbs.db
