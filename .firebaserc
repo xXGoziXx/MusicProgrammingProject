@@ -1,5 +1,14 @@
 {
   "projects": {
     "default": "listen-and-lyrics"
+  },
+  "targets": {
+    "listen-and-lyrics": {
+      "hosting": {
+        "MusicProgrammingProject": [
+          "listen-and-lyrics"
+        ]
+      }
+    }
   }
 }

@@ -2,7 +2,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../core/auth.service';
 import { PlayedTrack } from '../core/user-type';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import firebase from 'firebase/app';
 import { SpotifyService } from '../services/spotify.service';
 import { GeniusService } from '../services/genius.service';
@@ -19,7 +19,7 @@ export class MainComponent implements OnInit {
   favourite: boolean;
   playCheck = false;
   playCountInterval = null;
-  constructor(
+  constructor (
     public auth: AuthService,
     private route: ActivatedRoute,
     private spotifyService: SpotifyService,
@@ -44,7 +44,7 @@ export class MainComponent implements OnInit {
       });
     });
   }
-  incrementPlayCount() {
+  incrementPlayCount () {
     if (!this.playCheck) {
       this.auth.currentUserDoc.playedTracks.forEach((playedTrack, i) => {
         if (playedTrack.id === this.songId) {
@@ -58,7 +58,7 @@ export class MainComponent implements OnInit {
       this.playCheck = true;
     }
   }
-  updateFavouriteSettings() {
+  updateFavouriteSettings () {
     let trackExists = false;
     // If the user is logged in
     if (this.auth.currentUserDoc !== undefined) {
@@ -130,7 +130,7 @@ export class MainComponent implements OnInit {
     }
   }
 
-  ngOnInit() {
+  ngOnInit () {
     // Makes songId = the hash of the URL e.g #123 = 123
     this.route.fragment.subscribe(fragment => {
       console.log('Route Updated!');

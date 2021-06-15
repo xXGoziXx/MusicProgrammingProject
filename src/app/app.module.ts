@@ -13,9 +13,9 @@ import { AboutComponent } from './about/about.component';
 import { CoreModule } from './core/core.module';
 import { AuthGuard } from './guards/auth.guard';
 
-import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
-import { AngularFireDatabaseModule } from 'angularfire2/database';
+import { AngularFireModule } from '@angular/fire';
+import { AngularFirestoreModule } from '@angular/fire/firestore';
+import { AngularFireDatabaseModule } from '@angular/fire/database';
 import { environment } from '../environments/environment';
 
 // Import for FontAwesome (icons galore)
@@ -34,7 +34,7 @@ import { MatCardModule } from '@angular/material/card';
 import { UserProfileComponent } from './user-profile/user-profile.component';
 
 // Import for Angular Material Icons
-import { MatIconModule } from '@angular/material';
+import { MatIconModule } from '@angular/material/icon';
 
 // Add an icon to the library for convenient access in other components
 library.add(fab, fas, far);
@@ -103,4 +103,4 @@ const appRoutes: Routes = [
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

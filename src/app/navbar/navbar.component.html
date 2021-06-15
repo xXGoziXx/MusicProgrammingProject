@@ -1,98 +1,110 @@
-<nav id="fun" class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand mb-0 h1" routerLink="/home">Listen & Lyrics</a>
-  <button
-    class="navbar-toggler white"
-    type="button"
-    data-toggle="collapse"
-    data-target="#navbarColor02"
-    aria-controls="navbarColor02"
-    aria-expanded="false"
-    aria-label="Toggle navigation"
-  >
-    <span class="navbar-toggler-icon"></span>
-  </button>
+<nav id="fun"
+     class="navbar navbar-expand-lg navbar-dark">
+  <div class="container-fluid">
 
-  <div class="collapse navbar-collapse" id="navbarColor02">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/home">Home</a>
-      </li>
-      <!-- <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/main">Tracks</a>
-      </li> -->
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/favourites">Favourites</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLinkActive="active" routerLink="/about">About</a>
-      </li>
-    </ul>
+    <a class="navbar-brand mb-0 h1"
+       routerLink="/home">Listen & Lyrics</a>
+    <button class="navbar-toggler white"
+            type="button"
+            data-toggle="collapse"
+            data-target="#navbarColor02"
+            aria-controls="navbarColor02"
+            aria-expanded="false"
+            aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-    <form class="form-inline my-2 my-lg-0">
-      <!-- <input type= "text" name="searchStr" [(ngModel)]="searchStr" (keyup) = "searchMusic()" data-toggle="dropdown" class="form-control mr-sm-2 "  placeholder="Search Tracks..." />    -->
-      <div class="dropdown searchy">
-        <input
-          type="text"
-          name="searchStr"
-          [(ngModel)]="searchStr"
-          (keyup)="searchTracks()"
-          data-toggle="dropdown"
-          class="form-control mr-sm-2"
-          placeholder="Search Tracks..."
-          autocomplete="off"
-        />
-        <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Results...          </button> -->
-        <div
-          id="drop"
-          class="dropdown-menu dropdown-menu-left overflow"
-          style="width:120%"
-          aria-labelledby="dropdownMenuButton"
-        >
-          <a class="dropdown-item" href="#"></a>
+    <div class="collapse navbar-collapse"
+         id="navbarColor02">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLinkActive="active"
+             routerLink="/home">Home</a>
+        </li>
+        <!-- <li class="nav-item">
+          <a class="nav-link" routerLinkActive="active" routerLink="/main">Tracks</a>
+        </li> -->
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLinkActive="active"
+             routerLink="/favourites">Favourites</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link"
+             routerLinkActive="active"
+             routerLink="/about">About</a>
+        </li>
+      </ul>
+
+      <form class="form-inline my-2 my-lg-0">
+        <!-- <input type= "text" name="searchStr" [(ngModel)]="searchStr" (keyup) = "searchMusic()" data-toggle="dropdown" class="form-control mr-sm-2 "  placeholder="Search Tracks..." />    -->
+        <div class="dropdown searchy">
+          <input type="text"
+                 name="searchStr"
+                 [(ngModel)]="searchStr"
+                 (keyup)="searchTracks()"
+                 data-toggle="dropdown"
+                 class="form-control mr-sm-2"
+                 placeholder="Search Tracks..."
+                 autocomplete="off" />
+          <!-- <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Results...          </button> -->
+          <div id="drop"
+               class="dropdown-menu dropdown-menu-left overflow"
+               style="width:120%"
+               aria-labelledby="dropdownMenuButton">
+            <a class="dropdown-item"
+               href="#"></a>
+          </div>
         </div>
+        <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit"> Search </button> -->
+      </form>
+      <div *ngIf="auth.user$ | async; then authenticated; else guest">
+        <!-- template will replace this div -->
       </div>
-      <!-- <button class="btn btn-secondary my-2 my-sm-0" type="submit"> Search </button> -->
-    </form>
-    <div *ngIf="auth.user$ | async; then authenticated; else guest">
-      <!-- template will replace this div -->
-    </div>
-    <ng-template #guest>
-      <div class="wrapper">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" style="cursor:pointer" data-toggle="modal" data-target="#exampleModal">Log In</a>
-          </li>
-        </ul>
-      </div>
-    </ng-template>
+      <ng-template #guest>
+        <div class="wrapper">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link"
+                 style="cursor:pointer"
+                 data-toggle="modal"
+                 data-target="#exampleModal">Log In</a>
+            </li>
+          </ul>
+        </div>
+      </ng-template>
 
-    <ng-template #authenticated>
-      <div *ngIf="auth.user$ | async as user">
-        <ul class="navbar-nav">
-          <li class="nav-item">
-            <a class="nav-link" style="cursor:pointer" data-toggle="modal" data-target="#exampleModal">
-              {{ user.displayName }}</a
-            >
-          </li>
-        </ul>
-        <!-- <img  [src]="user.photoURL"> -->
-      </div>
-    </ng-template>
+      <ng-template #authenticated>
+        <div *ngIf="auth.user$ | async as user">
+          <ul class="navbar-nav">
+            <li class="nav-item">
+              <a class="nav-link"
+                 style="cursor:pointer"
+                 data-toggle="modal"
+                 data-target="#exampleModal">
+                {{ user.displayName }}</a>
+            </li>
+          </ul>
+          <!-- <img  [src]="user.photoURL"> -->
+        </div>
+      </ng-template>
+    </div>
   </div>
 </nav>
 
-<div
-  class="modal fade"
-  id="exampleModal"
-  tabindex="-1"
-  role="dialog"
-  aria-labelledby="exampleModalLabel"
-  aria-hidden="true"
->
-  <div class="modal-dialog" role="document">
+<div class="modal fade"
+     id="exampleModal"
+     tabindex="-1"
+     role="dialog"
+     aria-labelledby="exampleModalLabel"
+     aria-hidden="true">
+  <div class="modal-dialog"
+       role="document">
     <div class="modal-content roundbox ">
       <div class="modal-header">
-        <h5 class="modal-title text-center" id="exampleModalLabel">Log In</h5>
+        <h5 class="modal-title text-center"
+            id="exampleModalLabel">Log In</h5>
         <!-- <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>-->
@@ -101,7 +113,9 @@
         <app-user-profile></app-user-profile>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-primary" data-dismiss="modal">Close</button>
+        <button type="button"
+                class="btn btn-primary"
+                data-dismiss="modal">Close</button>
       </div>
     </div>
   </div>

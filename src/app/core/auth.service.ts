@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-
-import * as firebase from 'firebase/app';
-import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import firebase from 'firebase/app'
+import 'firebase/auth';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestore, AngularFirestoreDocument } from '@angular/fire/firestore';
 import { User } from './user-type';
 
 import { Observable, of } from 'rxjs';
@@ -16,7 +16,7 @@ export class AuthService {
   user$: Observable<User>;
   userRef: AngularFirestoreDocument;
   currentUserDoc: User;
-  constructor(private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
+  constructor (private afAuth: AngularFireAuth, private afs: AngularFirestore, private router: Router) {
     // Get auth data, then get firestore user document || null
     this.user$ = this.afAuth.authState.pipe(
       switchMap(user => {
@@ -33,13 +33,13 @@ export class AuthService {
     });
   }
 
-  googleLogin() {
+  googleLogin () {
     const provider = new firebase.auth.GoogleAuthProvider();
     return this.oAuthLogin(provider);
   }
 
-  private oAuthLogin(provider) {
-    return this.afAuth.auth.signInWithPopup(provider).then(credential => {
+  private oAuthLogin (provider) {
+    return this.afAuth.signInWithPopup(provider).then(credential => {
       // If its a new user
       if (credential.additionalUserInfo.isNewUser) {
         this.updateUserData(credential.user);
@@ -47,7 +47,7 @@ export class AuthService {
     });
   }
 
-  private updateUserData(user) {
+  private updateUserData (user) {
     // Sets user data to firestore on login
 
     console.log(this.userRef);
@@ -62,8 +62,8 @@ export class AuthService {
     return this.userRef.set(data, { merge: true });
   }
 
-  signOut() {
-    this.afAuth.auth.signOut().then(() => {
+  signOut () {
+    this.afAuth.signOut().then(() => {
       this.router.navigate(['/']);
     });
   }
